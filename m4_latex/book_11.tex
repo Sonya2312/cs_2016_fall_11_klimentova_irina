@@ -1,131 +1,159 @@
-\documentclass[a4paper]{book}
-\usepackage[fleqn]{amsmath}
-\usepackage[T2A]{fontenc}
-\usepackage[utf8x]{inputenc}
-\usepackage[english, russian]{babel}
-\setcounter{chapter}{3}
-\setcounter{section}{2}
-\setcounter{subsection}{3}
-\usepackage{amsmath} 
-\usepackage{textcomp} 
-\usepackage{graphicx} 
-\usepackage[colorinlistoftodos]{todonotes} 
-\usepackage[colorlinks=true, allcolors=blue]{hyperref} 
-\usepackage{setspace}
-\usepackage{amsmath}
-\begin{document} 
-\paragraph{}
-\parskip=20pt
-3.3 {\it Estimating derivatives}\\
-\\
-\\
-{\it What is a reasonable lumping rectangle?}\\
-\\
-{\large The rectangle’s height is the peak height $n^n$ $e^{-n}$.
-For the rectangle’s width, use either the $1/e$ or
-the FWHM heuristic  require approximating $t^n$ $e^{-t}$, expand its logarithm $f(t)$ in a Taylor series around its peak at $t=n$:}\\
-$$f=(n+\Delta t)=f(n)+\Delta t\frac{df}{dt}\Bigl|_{t=n}+\frac{(\Delta t)^2}{2}\frac{d^2f}{dt^2}\Bigl|_{t=n}+\ldots\eqno{3.10}$$
-{\large The second term of the Taylor expansion vanishes because $f(t)$ has zero slope at the peak. In the third term, the second derivative $d^2f/dt^2$ at $t=n$ is $-n/t^2$ or $-1/n$.Thus,}\\
-$$f=(n+\Delta t)\approx f(n)-\frac{(\Delta t)^2}{2n}\eqno{3.11}$$
-{\large To decrease $t^n$ $e^{-t}$ t by a factor of $F$ requires decreasing $f(t)$ by $\ln F$.This choice means $\sqrt{2n\ln F}$. Because the rectangle’s width is $2\Delta t$, the
- lumped-area estimate of ${n!}$ is}\\
-$$\\{n!}\sim n^n e^{-n} \sqrt{n}\times
-\begin{cases}
-\sqrt{8}~~~~~~~~\text{$(1/e~ criterion: F=e)$} \\
-\sqrt{8\ln 2}~~~\text{$(FWHM criterion: F=2)$}
-\end{cases}
-\eqno{3.12}$$\\
-{\large For comparison, Stirling’s formula is $n!\approx n^n e^{-n} \sqrt{2\pi n}$. Lumping has explained almost every factor. The $n^n e^{-n}$ factor is the height of the rectangle,
-and the $\sqrt{n}$ factor is from the width of the rectangle. Although the exact $\sqrt{2\pi}$ factor remains mysterious (Problem 3.9), it is approximated to within 13\%  (the $1/e$ heuristic) or 6\%  (the FWHM heuristic).}\\
-\\
-{\bf\small Problem 3.8 Coincidence?}\\
-{\small The FWHM approximation for the area under a Gaussian (Section 3.2.2) was also accurate to 6\% Coincidence?}\\
-{\bf\small Problem 3.9 Exact constant in Stirling’s formula}\\
-{\small Where does the more accurate constant factor of $\sqrt{2\pi}$ come from?}\\
-\\
-{\bf\large 3.3 Estimating derivatives}\\
-{\large In the preceding examples, lumping helped estimate integrals. Because integration and differentiation are closely related, lumping also provides }\\\newpage
-\noindent {\large a method for estimating derivatives. The method begins with a dimensional observation about derivatives. A derivative is a ratio of differentials;for example,$df/dx$ is the ratio of $df$ or $dx$. Because $d$ is dimensionless
-(Section 1.3.2), the dimensions of $df/dx$ are the dimensions of f/x. This useful, surprising conclusion is worth testing with a familiar example:\\
-Differentiating height $y$ with respect to time $t$ produces velocity $dy/dt$, whose dimensions of $LT^{-1}$ are indeed the dimensions of $y/t$.}\\
-\\
-{\small\bf Problem 3.10 Dimensions of a second derivative}\\
-What are the dimensions of $d^2f/dx^2$?\\
-\\
-{\bf\large 3.3.1 Secant approximation}\\
-{\large As df/dx and f/x have identical dimensions,
-perhaps their magnitudes are similar:}\\
-  $$\frac{df}{dx}\sim\frac{f}{x}\eqno{3.13}$$\\
-{\large Geometrically, the derivative $df/dx$ is the slope
-of the tangent line, whereas the approximation
-$f/x$ is the slope of the secant line. By replacing
-the curve with the secant line, we make a
-lumping approximation.\\
-Let’s test the approximation on an easy function such as $f(x)=x^2$. Good
-news—the secant and tangent slopes differ only by a factor of:}\\
-$$\frac{df}{dx}=2x~~and~~\frac{f(x)}{x}=x.\eqno{3.14}$$
-\\
-{\bf\small Problem 3.11 Higher powers}\\
-{\small Investigate the secant approximation for$f(x)=x^n$.}\\
-{\bf\small Problem 3.12 Second derivatives}\\
-{\small Use the secant approximation to estimate $d^2f/dx^2$ with $f(x) = x^2$. How does the approximation compare to the exact second derivative?}\\
-\\
-{\it How accurate is the secant approximation for $f(x)=x^2+100$ ?}\\
-\\
-{\large The secant approximation is quick and useful but can make large errors.
-When $f(x)= x^2+100$ , for example, the secant and tangent at $x=1$}\\
-\newpage
-\noindent {\large have dramatically different slopes. The tangent slope $df/dx$ x is, whereas
-the secant slope $f(1)/1$ is $101$. The ratio of these two slopes, although dimensionless, is distressingly large.}\\
-\\
-{\bf\small Problem 3.13 Investigating the discrepancy}\\
-{\small With $f(x) = x^2 + 100$, sketch the ratio}\\
-$$\frac{secant slope}{tangent slope}\eqno{3.15}$$
-{\small as a function of x. The ratio is not constant! Why is the dimensionless factor not
-constant? (That question is tricky.)}\\
-\\
-{\large The large discrepancy in replacing the derivative $df/dx$, which is}
-$$\lim_{\Delta x\to0}\frac{f(x)-f(x-\Delta x)}{\Delta x},\eqno {3.16}$$\\
-{\large with the secant slope $f(x)/x$ is due to two approximations. The first
-approximation is to take $\Delta x=x$ rather than $\Delta x=0$  Then $ df/dx\approx
-(f(x) − f(0))/x$. This first approximation produces the slope of the line
-from $(0, f(0)) to (x, f(x))$. The second approximation replaces $f(0)$ with
-$0$, which produces $df/dx\approx f/x$; that ratio is the slope of the secant from $(0, 0)$ to $(x, f(x)).$\\
-\\
-{\bf\large 3.3.2 Improved secant approximation}\\
-{\large The second approximation is fixed by starting the secant at $(0, f(0))$ instead of $(0, 0).$ With that change, what are the secant and tangent slopes when $f(x) = x^2 + C$? Call the secant starting at $(0, 0)$ the origin secant; call the new secant the $x = 0$ secant.Then the $x = 0$ secant always has one-half the slope of the tangent, no matter the constant $C$. The $x = 0$ secant approximation is robust against—is unaffected by—vertical translation.}\\
-\\
-{\it How robust is the x = 0 secant approximation against horizontal translation?}\\
-\\
-{\large To investigate how the $x = 0$ secant handles horizontal translation, translate
-$f(x) = x^2$ rightward by $100$ to make $f(x)=(x−100)^2$. At the parabola’s}\\
-\newpage
-\noindent {\large vertex $x = 100$, the $x = 0$ secant, from $(0, 10^4)$ to $(100, 0)$, has slope $−100$;
-however, the tangent has zero slope. Thus the $x = 0$ secant, although an
-improvement on the origin secant, is affected by horizontal translation}\\
-\\
-{\large\bf 3.3.3 Significant-change approximation}\\
-{\large The derivative itself is unaffected by horizontal and vertical translation,
-so a derivative suitably approximated might be translation invariant. An
-approximate derivative is}\\
-$$\frac{df}{dx}\approx\frac{f(x+\Delta x)-f(x)}{\Delta x},\eqno{3.17}$$\\
-{\large where $\Delta x$ is not zero but is still small.}\\
-\\
-{\it How small should $\Delta x$ be? Is $\Delta x = 0.01$ small enough?}\\
-\\
-{\large The choice $\Delta x = 0.01$ has two defects. First, it cannot work when x has
-dimensions. If x is a length, what length is small enough? Choosing $\Delta x =
-1 mm$ is probably small enough for computing derivatives related to the
-solar system, but is probably too large for computing derivatives related
-to falling fog droplets. Second, no fixed choice can be scale invariant.
-Although $\Delta x = 0.01$ produces accurate derivatives when $f(x) = sin x$, it
-fails when $f(x) = sin 1000x$, the result of simply rescaling $x$ to $1000x$.}\\
-\\
-{\large These problems suggest trying the following significant-change approximation:}\\
-$$\frac{df}{dx}\approx\frac{\text{significant} \Delta x \text{(change in f)}\text{at} x}{\Delta x \text{that produces a significant} \Delta f}.\eqno {3.18}$$\\
-{\large Because the $\Delta x$ here is defined by the properties of the curve at the point
-of interest, without favoring particular coordinate values or values of $\Delta x$,
-the approximation is scale and translation invariant.}\\
-{\large To illustrate this approximation, let’s try $f(x) = cos x$ and estimate $df/dx$ at $x =
-3\pi/2$ with the three approximations: the origin secant, the $x = 0$ secant, and the significant-change approximation. The origin secant goes from $(0, 0)$ to $(3\pi/2, 0)$, so it has zero slope. It is a poor approximation to the exact slope of $1$. The $x = 0$}
-\end{document}
+    \documentclass[a4paper, 12pt]{book}
+    \usepackage{comment}
+    \usepackage{fullpage}
+    \usepackage[utf8x]{inputenc}
+    \usepackage[T2A]{fontenc}
+    \usepackage[english,russian]{babel}
+    \pagestyle{empty}
+
+    \setcounter{chapter}{3}
+    \setcounter{section}{2}
+
+    \setcounter{subsection}{3}
+    \setcounter{equation}{9}
+
+    \usepackage[fleqn]{amsmath}
+
+    \usepackage{color}
+    \definecolor{light-gray}{rgb}{0.8,0.8,0.8}
+
+    \begin{document}
+    \noindent
+    \large\textit{ 3.3 Estimating derivatives} \hfill \textbf{37} \\
+    \\
+    {\it What is a reasonable lumping rectangle?}\\
+    \\
+    The rectangle’s height is the peak height $n^n$ $e^{-n}$.
+    For the rectangle’s width, use either the $1/e$ or
+    the FWHM heuristic require approximating $t^n$ $e^{-t}$, expand its logarithm $f(t)$ in a Taylor series around its peak at $t=n$:
+    \begin{equation}f=(n+\Delta t)=f(n)+\Delta t\frac{df}{dt}\Bigl|_{t=n}+\frac{(\Delta t)^2}{2}\frac{d^2f}{dt^2}\Bigl|_{t=n}+\ldots\end{equation}
+    The second term of the Taylor expansion vanishes because $f(t)$ has zero slope at the peak. In the third term, the second derivative $d^2f/dt^2$ at $t=n$ is $-n/t^2$ or $-1/n$.Thus,
+    \begin{equation}f=(n+\Delta t)\approx f(n)-\frac{(\Delta t)^2}{2n}\end{equation}
+    To decrease $t^n$ $e^{-t}$ t by a factor of $F$ requires decreasing $f(t)$ by $\ln F$.This choice means $\sqrt{2n\ln F}$. Because the rectangle’s width is $2\Delta t$, the
+    lumped-area estimate of ${n!}$ is
+    \begin{equation}\\{n!}\sim n^n e^{-n} \sqrt{n}\times
+    \begin{cases}
+    \sqrt{8}~~~~~~~~\text{$(1/e~ criterion: F=e)$} \\
+    \sqrt{8\ln 2}~~~\text{$(FWHM criterion: F=2)$}
+    \end{cases}
+    \end{equation}
+    For comparison, Stirling’s formula is $n!\approx n^n e^{-n} \sqrt{2\pi n}$. Lumping has explained almost every factor. The $n^n e^{-n}$ factor is the height of the rectangle,
+    and the $\sqrt{n}$ factor is from the width of the rectangle. Although the exact $\sqrt{2\pi}$ factor remains mysterious (Problem 3.9), it is approximated to within 13\% (the $1/e$ heuristic) or 6\% (the FWHM heuristic).\\
+
+    \colorbox{light-gray}{
+    \begin{minipage}{\textwidth}
+    \large\textbf{Problem 3.8 Coincidence?}
+
+    The FWHM approximation for the area under a Gaussian (Section 3.2.2) was also accurate to $6\%$ Coincidence?\\
+
+    \large\textbf{Problem 3.9 Exact constant in Stirling’s formula}
+
+    Where does the more accurate constant factor of $\sqrt{2\pi}$ come from?\end{minipage}}
+    \\
+    \section{Estimating derivatives}
+    In the preceding examples, lumping helped estimate integrals. Because
+    integration and differentiation are closely related, lumping also provides
+    \newpage
+    \noindent
+    \large\textbf{38} \hfill \textit{3 Lumping} \\
+
+    a method for estimating derivatives. The method begins with a dimensional observation about derivatives. A derivative is a ratio of differentials;for example,$df/dx$ is the ratio of $df$ or $dx$. Because $d$ is dimensionless
+    (Section 1.3.2), the dimensions of $df/dx$ are the dimensions of f/x. This useful, surprising conclusion is worth testing with a familiar example:\\
+    Differentiating height $y$ with respect to time $t$ produces velocity $dy/dt$, whose dimensions of $LT^{-1}$ are indeed the dimensions of $y/t$.
+    \\
+    \colorbox{light-gray}{
+    \begin{minipage}{\textwidth}
+    \textbf{Problem 3.10 Dimensions of a second derivative}
+
+    What are the dimensions of $d^2f/dx^2$?\\
+    \end{minipage}}
+    \\
+    \section{Secant approximation}
+    As $df/dx$ and $f/x$ have identical dimensions,
+    perhaps their magnitudes are similar:
+    \begin{equation} \frac{df}{dx}\sim\frac{f}{x}\end{equation}
+    Geometrically, the derivative $df/dx$ is the slope
+    of the tangent line, whereas the approximation
+    $f/x$ is the slope of the secant line. By replacing
+    the curve with the secant line, we make a
+    lumping approximation.
+    Let’s test the approximation on an easy function such as $f(x)=x^2$. Good
+    news—the secant and tangent slopes differ only by a factor of:
+    \begin{equation}\frac{df}{dx}=2x~~and~~\frac{f(x)}{x}=x.\end{equation}
+
+    \colorbox{light-gray}{
+    \begin{minipage}{\textwidth}
+    \textbf{Problem 3.11 Higher powers}
+    Investigate
+    the secant approximation for$f(x)=x^n$.
+    Problem 3.12 Second derivatives
+    Use the secant approximation to estimate $d^2f/dx^2$ with $f(x) = x^2$. How does the approximation compare to the exact second derivative?
+    \end{minipage}}
+    \\
+    {\it How accurate is the secant approximation for $f(x)=x^2+100$ ?}\\
+    \\
+    The secant approximation is quick and useful but can make large errors.
+    When $f(x)= x^2+100$ , for example, the secant and tangent at $x=1$
+    \newpage
+    \noindent
+    \large\textit{3.3 Estimating derivatives} \hfill \textbf{39} \\
+
+    have dramatically different slopes. The tangent slope $df/dx$ x is, whereas
+    the secant slope $f(1)/1$ is $101$. The ratio of these two slopes, although dimensionless, is distressingly large.\\
+    \colorbox{light-gray}{
+    \begin{minipage}{\textwidth}
+    \textbf{Problem 3.13 Investigating the discrepancy}
+    With $f(x) = x^2 + 100$, sketch the ratio
+    \begin{equation}\frac{secant slope}{tangent slope}\end{equation}
+    as a function of x. The ratio is not constant! Why is the dimensionless factor not
+    constant? (That question is tricky.)
+    \end{minipage}} \\
+    The large discrepancy in replacing the derivative $df/dx$, which is
+    \begin{equation}\lim_{\Delta x\to0}\frac{f(x)-f(x-\Delta x)}{\Delta x},\end{equation}
+    with the secant slope $f(x)/x$ is due to two approximations. The first
+    approximation is to take $\Delta x=x$ rather than $\Delta x=0$ Then $ df/dx\approx
+    (f(x) − f(0))/x$. This first approximation produces the slope of the line
+    from $(0, f(0)) to (x, f(x))$. The second approximation replaces $f(0)$ with
+    $0$, which produces $df/dx\approx f/x$; that ratio is the slope of the secant from $(0, 0)$ to $(x, f(x)).$ \\
+    \section{Improved secant approximation}
+    The second approximation is fixed by starting the secant at $(0, f(0))$ instead of $(0, 0).$ With that change, what are the secant and tangent slopes when $f(x) = x^2 + C$? Call the secant starting at $(0, 0)$ the origin secant; call the new secant the $x = 0$ secant.Then the $x = 0$ secant always has one-half the slope of the tangent, no matter the constant $C$. The $x = 0$ secant approximation is robust against—is unaffected by—vertical translation.
+    \\
+    {\it How robust is the x = 0 secant approximation against horizontal translation?}\\
+    \\
+    To investigate how the $x = 0$ secant handles horizontal translation, translate
+    $f(x) = x^2$ rightward by $100$ to make $f(x)=(x−100)^2$. At the parabola’s
+    \newpage
+    \noindent
+    \large\textbf{40} \hfill \textit{3 Lumping} \\
+
+    vertex $x = 100$, the $x = 0$ secant, from $(0, 10^4)$ to $(100, 0)$, has slope $−100$;
+    however, the tangent has zero slope. Thus the $x = 0$ secant, although an
+    improvement on the origin secant, is affected by horizontal translation
+    \\
+    {\large\bf 3.3.3 Significant-change approximation}\\
+    The derivative itself is unaffected by horizontal and vertical translation,
+    so a derivative suitably approximated might be translation invariant. An
+    approximate derivative is
+    \begin{equation}\frac{df}{dx}\approx\frac{f(x+\Delta x)-f(x)}{\Delta x},\end{equation}
+    where $\Delta x$ is not zero but is still small.
+    \\
+    {\it How small should $\Delta x$ be? Is $\Delta x = 0.01$ small enough?}\\
+    \\
+    The choice $\Delta x = 0.01$ has two defects. First, it cannot work when x has
+    dimensions. If x is a length, what length is small enough? Choosing $\Delta x =
+    1 mm$ is probably small enough for computing derivatives related to the
+    solar system, but is probably too large for computing derivatives related
+    to falling fog droplets. Second, no fixed choice can be scale invariant.
+    Although $\Delta x = 0.01$ produces accurate derivatives when $f(x) = sin x$, it
+    fails when $f(x) = sin 1000x$, the result of simply rescaling $x$ to $1000x$.
+    \\
+    {\large These problems suggest trying the following significant-change approximation:}\\
+    \begin{equation}\frac{df}{dx}\approx\frac{\text{significant} \Delta x \text{(change in f)}\text{at} x}{\Delta x \text{that produces a significant} \Delta f}.\end{equation}
+    Because the $\Delta x$ here is defined
+    by the properties of the curve at the point
+    of interest, without favoring particular coordinate values or values of $\Delta x$,
+    the approximation is scale and translation invariant.
+    To illustrate this approximation, let’s try $f(x) = cos x$ and estimate $df/dx$ at $x =
+    3\pi/2$ with the three approximations: the origin secant, the $x = 0$ secant, and the significant-change approximation. The origin secant goes from $(0, 0)$ to $(3\pi/2, 0)$, so it has zero slope. It is a poor approximation to the exact slope of $1$. The $x = 0$
+    \end{document}
+
